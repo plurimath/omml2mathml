@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   DESCRIPTION
 
   spec.homepage      = "https://github.com/riboseinc/omml2mathml"
-  spec.license       = "BSD-2"
+  spec.license       = "BSD-2-Clause"
 
   spec.bindir        = "bin"
   spec.require_paths = ["lib"]

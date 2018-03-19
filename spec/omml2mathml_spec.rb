@@ -4,9 +4,8 @@ RSpec.describe Omml2Mathml do
   end
 
   it "processes a document" do
-    html = Html2Doc.process(html_input("spec/test.html"), filename: "test")
-    expect(guid_clean(File.read("test.doc", encoding: "utf-8"))).
-      to be_equivalent_to <<~"OUTPUT"
+    html = Omml2Mathml.convert("spec/test.html")
+    expect(html).to be_equivalent_to <<~"OUTPUT"
     xxx
     OUTPUT
   end

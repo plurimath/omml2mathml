@@ -2,7 +2,9 @@ require "xml/xslt"
 require "nokogiri"
 
 module Omml2Mathml
-  @@tags = %w{
+  module_function
+  def convert(filename)
+  @tags = %w{
 acc
 accPr
 aln
@@ -129,19 +131,18 @@ zeroDesc
 zeroWid
   }
 
-  @@mathml = {}
-  @@tags.each do |t| 
-    @@mathml["m_#{t.downcase}"] = "m:#{t}" 
+  @mathml = {}
+  @tags.each do |t| 
+    @mathml["m_#{t.downcase}"] = "m:#{t}" 
   end
 
-  def self.convert(filename)
     html = Nokogiri::HTML.parse(File.read(filename, encoding: "utf-8").
                                 gsub(/\r/, "").gsub(/<m:/, "<m_").
                                 gsub(/<\/m:/, "</m_").
                                 gsub(/<!\[if !msEquation\]>/,
                                      "<!--if !msEquation-->"))
     @xslt = XML::XSLT.new
-    @xslt.xsl = File.read(File.join(File.dirname(__FILE__), "xhtml-mathml.xsl"))
+    @xslt.xsl = File.join(File.dirname(__FILE__), "xhtml-mathml.xsl")
     html.traverse do |n|
       if n.comment?
         if /^\[if gte msEquation 12\]>/.match? n.text 
@@ -157,8 +158,8 @@ zeroWid
     end
     xml = Nokogiri::XML(html.to_xhtml)
     xml.traverse do |t|
-      if t.element? && @@mathml.has_key?(t.name)
-        t.name = @@mathml[t.name]
+      if t.element? && @mathml.has_key?(t.name)
+        t.name = @mathml[t.name]
       end
     end
     #xml.xpath("//xmlns:link | //xmlns:style | //*[@class = 'MsoToc1'] | //*[@class = 'MsoToc2'] |//*[@class = 'MsoToc3'] |//*[@class = 'MsoToc4'] |//*[@class = 'MsoToc5'] |//*[@class = 'MsoToc6'] |//*[@class = 'MsoToc7'] |//*[@class = 'MsoToc8'] |//*[@class = 'MsoToc9'] ").each { |x| x.remove }

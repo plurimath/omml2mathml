@@ -1,11 +1,15 @@
+require "rspec"
 require "simplecov"
 SimpleCov.start do
   add_filter "/spec/"
 end
 
 require "bundler/setup"
-require 'rspec/match_fuzzy'
 require "omml2mathml"
+require "rspec/matchers"
+require "equivalent-xml"
+
+#require_relative "lib/omml2mathml/convert"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
