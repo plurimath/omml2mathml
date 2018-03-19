@@ -1,0 +1,23 @@
+= omml2mathml
+Convert Office Math Markup to MathML
+
+This is a Ruby gem for converting Office Math Markup (OMML) into MathML within Word HTML documents.
+
+The smarts of this gem comes from different sources:
+
+* Most of the conversion of the OMML conversion is done by the `omml2mml.xsl` stylesheet. This is a
+prerelease version of the `omml2mathml.xsl` that currently ships with Microsoft Word, and which is how Word allows
+you to copy-paste MathML out of Word. The `omml2mml.xsl` version of the stylesheet has been published for several years now as part of the https://github.com/TEIC/Stylesheets[TEI stylesheet set]. (We have made some minor edits to the stylesheet, downgrading it from XSLT v2 to v1.) The stylesheets have been published under a dual Creative Commons Sharealike/BSD licence.
+
+* The `omml2mml.xsl` stylesheet does most of the conversion; the remainder is done by the `xhtml-mathml.xsl` stylesheet, created by David Carlisle in 2007 (and https://github.com/davidcarlisle/web-xslt/tree/master/omml2mml[available on Github]). We have done some minor edits to this stylesheet too, downgrading it from XSLT v2 to v1 and removing some functionality in the process; the MathML itself is unaffected.
+
+The gem also converts any file it processes from HTML to XHTML, so that the stylesheets can deal with it. In the process, it needs to restore the casing of OOXML tags, which are case-sensitive.
+
+== Usage
+
+[source,ruby]
+----
+require "omml2mathml"
+
+html = Ooml2Mathml.convert("Word.html")
+----
