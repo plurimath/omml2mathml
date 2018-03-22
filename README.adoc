@@ -21,3 +21,7 @@ require "omml2mathml"
 
 html = Ooml2Mathml.convert("Word.html")
 ----
+
+== See Also
+
+* https://github.com/scienceai/omml2mathml: A NodeJS implementation of the OMML to MathML stylesheet, bypassing XSLT.
