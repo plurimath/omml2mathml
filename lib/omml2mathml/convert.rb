@@ -145,10 +145,10 @@ zeroWid
     @xslt.xsl = File.join(File.dirname(__FILE__), "xhtml-mathml.xsl")
     html.traverse do |n|
       if n.comment?
-        if /^\[if gte msEquation 12\]>/.match? n.text 
+        if /^\[if gte msEquation 12\]>/.match n.text 
           n.replace(n.text.sub(/\[if gte msEquation 12\]>/, "").
                     sub(/<!\[endif\]/, ""))
-        elsif /^if !msEquation/.match? n.text
+        elsif /^if !msEquation/.match n.text
           n.next.remove
           n.remove
         else
