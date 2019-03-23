@@ -16,7 +16,19 @@ install:
   - refreshenv
 
 build_script:
-  - set PATH=C:\Ruby%RUBY_VERSION%\bin;%PATH%
+  - git clone https://github.com/glejeune/ruby-xslt.git
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
+  - cd ruby-xslt
+  - cd ext\xslt_lib
+  - sed -i.back 's/"r"/"rb"/g' parser.c
+  - set XsltDist=%ChocolateyInstall%\lib\xsltproc\dist
+  - C:\Ruby%RUBY_VERSION%\bin\ruby extconf.rb --with-xml2-include=%XsltDist%\include\libxml2 --with-xslt-include=%XsltDist%\include --with-xml2-lib=%XsltDist%\lib --with-xslt-lib=%XsltDist%\lib
+  - make DESTDIR=
+  - make DESTDIR= install
+  - cd ..\..
+  - gem build ruby-xslt.gemspec
+  - gem install ruby-xslt-0.9.10.gem -- --with-xml2-include=%XsltDist%\include\libxml2 --with-xslt-include=%XsltDist%\include --with-xml2-lib=%XsltDist%\lib --with-xslt-lib=%XsltDist%\lib
+  - cd ..
   - bundle update
   - bundle install
 
