@@ -1,7 +1,8 @@
 = omml2mathml
   
 image:https://img.shields.io/gem/v/omml2mathml.svg["Gem Version", link="https://rubygems.org/gems/omml2mathml"]
-image:https://img.shields.io/travis/metanorma/omml2mathml/master.svg["Build Status", link="https://travis-ci.org/metanorma/omml2mathml"]
+image:https://img.shields.io/travis/metanorma/omml2mathml/master.svg["Travis Build Status", link="https://travis-ci.org/metanorma/omml2mathml"]
+image:https://ci.appveyor.com/api/projects/status/vp0jam9miy9lvftj?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/projects/ribose/omml2mathml"]
 image:https://codeclimate.com/github/metanorma/omml2mathml/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/omml2mathml"]
 
 Convert Office Math Markup to MathML
