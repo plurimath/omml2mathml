@@ -1,4 +1,3 @@
-require "xml/xslt"
 require "nokogiri"
 
 module Omml2Mathml
@@ -141,8 +140,7 @@ zeroWid
                                 gsub(/<\/m:/, "</m_").
                                 gsub(/<!\[if !msEquation\]>/,
                                      "<!--if !msEquation-->"))
-    @xslt = XML::XSLT.new
-    @xslt.xsl = File.join(File.dirname(__FILE__), "xhtml-mathml.xsl")
+    @xslt = Nokogiri::XSLT(File.open(File.join(File.dirname(__FILE__), "xhtml-mathml.xsl"), "rb"))
     html.traverse do |n|
       if n.comment?
         if /^\[if gte msEquation 12\]>/.match n.text 
@@ -165,11 +163,8 @@ zeroWid
     #xml.xpath("//xmlns:link | //xmlns:style | //*[@class = 'MsoToc1'] | //*[@class = 'MsoToc2'] |//*[@class = 'MsoToc3'] |//*[@class = 'MsoToc4'] |//*[@class = 'MsoToc5'] |//*[@class = 'MsoToc6'] |//*[@class = 'MsoToc7'] |//*[@class = 'MsoToc8'] |//*[@class = 'MsoToc9'] ").each { |x| x.remove }
     xml.xpath("//*").each do |x|
       if x.name == "m:oMath" || x.name == "m:oMathPara"
-        @xslt.xml = x.to_xml.
-          sub(/<m:(oMath|oMathPara)>/,
-              "<m:\\1 xmlns:m='http://schemas.openxmlformats.org/officeDocument/2006/math'>")
-        out = @xslt.serve
-        mml = out.gsub(/<\?xml[^>]+>/, '').
+        out = @xslt.transform(Nokogiri::XML(x.to_xml.sub(/<m:(oMath|oMathPara)>/,"<m:\\1 xmlns:m='http://schemas.openxmlformats.org/officeDocument/2006/math'>")))
+        mml = out.to_xml.gsub(/<\?xml[^>]+>/, '').
           gsub(%r{<([^:/! >]+ xmlns="http://www.w3.org/1998/Math/MathML")},
                "<mml:\\1").
           gsub(%r{<([^:/!>]+)>}, "<mml:\\1>").
