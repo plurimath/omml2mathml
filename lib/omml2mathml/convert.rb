@@ -132,7 +132,7 @@ zeroWid
 
   @mathml = {}
   @tags.each do |t| 
-    @mathml["m_#{t.downcase}"] = "m:#{t}" 
+    @mathml["m_#{t.downcase}"] = t
   end
 
     html = Nokogiri::HTML.parse(File.read(filename, encoding: "utf-8").
@@ -155,26 +155,29 @@ zeroWid
       end
     end
     xml = Nokogiri::XML(html.to_xhtml)
+    ns = xml.root.add_namespace 'm', "http://schemas.microsoft.com/office/2004/12/omml"
     xml.traverse do |t|
       if t.element? && @mathml.has_key?(t.name)
         t.name = @mathml[t.name]
+        t.namespace = ns
       end
     end
     #xml.xpath("//xmlns:link | //xmlns:style | //*[@class = 'MsoToc1'] | //*[@class = 'MsoToc2'] |//*[@class = 'MsoToc3'] |//*[@class = 'MsoToc4'] |//*[@class = 'MsoToc5'] |//*[@class = 'MsoToc6'] |//*[@class = 'MsoToc7'] |//*[@class = 'MsoToc8'] |//*[@class = 'MsoToc9'] ").each { |x| x.remove }
-    xml.xpath("//*").each do |x|
-      if x.name == "m:oMath" || x.name == "m:oMathPara"
-        out = @xslt.transform(Nokogiri::XML(x.to_xml.sub(/<m:(oMath|oMathPara)>/,"<m:\\1 xmlns:m='http://schemas.openxmlformats.org/officeDocument/2006/math'>")))
-        mml = out.to_xml.gsub(/<\?xml[^>]+>/, '').
-          gsub(%r{<([^:/! >]+ xmlns="http://www.w3.org/1998/Math/MathML")},
-               "<mml:\\1").
-          gsub(%r{<([^:/!>]+)>}, "<mml:\\1>").
-          gsub(%r{</([^:/!>]+)>}, "</mml:\\1>").
-          gsub(%r{ xmlns="http://www.w3.org/1998/Math/MathML"}, "").
-          gsub(%r{ xmlns:mml="http://www.w3.org/1998/Math/MathML"}, "").
-          gsub(%r{ xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"}, "").
-          gsub(%r{ xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"}, "")
-        x.replace("<mml:math>#{mml}</mml:math>")
-      end
+    xml.xpath("//*[local-name()='oMath' or local-name()='oMathPara']").each do |x|
+      # prepare input: delete xmlns & change
+      input = Nokogiri::XML(x.to_xml.sub(/<m:(oMath|oMathPara)>/,
+                                         "<m:\\1 xmlns:m='http://schemas.openxmlformats.org/officeDocument/2006/math'>"))
+      out = @xslt.transform(input)
+      mml = out.to_xml.gsub(/<\?xml[^>]+>/, '').
+        gsub(%r{<([^:/! >]+ xmlns="http://www.w3.org/1998/Math/MathML")},
+             "<mml:\\1").
+        gsub(%r{<([^:/!>]+)>}, "<mml:\\1>").
+        gsub(%r{</([^:/!>]+)>}, "</mml:\\1>").
+        gsub(%r{ xmlns="http://www.w3.org/1998/Math/MathML"}, "").
+        gsub(%r{ xmlns:mml="http://www.w3.org/1998/Math/MathML"}, "").
+        gsub(%r{ xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"}, "").
+        gsub(%r{ xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"}, "")
+      x.replace("<mml:math>#{mml}</mml:math>")
     end
     xml.to_s
   end
