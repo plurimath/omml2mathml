@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    omml2mathml (0.0.3)
+    omml2mathml (0.0.4)
       nokogiri
 
 GEM
@@ -45,7 +45,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     parallel (1.17.0)
-    parser (2.6.2.0)
+    parser (2.6.2.1)
       ast (~> 2.4.0)
     powerpack (0.1.2)
     pry (0.12.2)
