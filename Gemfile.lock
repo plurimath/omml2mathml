@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    omml2mathml (0.0.4)
+    omml2mathml (0.0.5)
       nokogiri
 
 GEM
