@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- {spec}/*`.split("\n")
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
-  spec.add_dependency "nokogiri"
+  spec.add_dependency "nokogiri", ">= 1.10.4"
 
   spec.add_development_dependency "bundler", "~> 2.0.1"
   spec.add_development_dependency "byebug", "~> 9.1"
