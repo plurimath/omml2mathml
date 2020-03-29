@@ -1,8 +1,9 @@
 = omml2mathml
   
 image:https://img.shields.io/gem/v/omml2mathml.svg["Gem Version", link="https://rubygems.org/gems/omml2mathml"]
-image:https://travis-ci.com/metanorma/omml2mathml.svg["Travis Build Status", link="https://travis-ci.com/metanorma/omml2mathml"]
-image:https://ci.appveyor.com/api/projects/status/3x3jixgaktfbaq4p?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/metanorma/omml2mathml"]
+image:https://github.com/metanorma/omml2mathml/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/omml2mathml/actions?query=workflow%3Aubuntu"]
+image:https://github.com/metanorma/omml2mathml/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/omml2mathml/actions?query=workflow%3Amacos"]
+image:https://github.com/metanorma/omml2mathml/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/omml2mathml/actions?query=workflow%3Awindows"]
 image:https://codeclimate.com/github/metanorma/omml2mathml/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/omml2mathml"]
 image:https://img.shields.io/github/issues-pr-raw/metanorma/omml2mathml.svg["Pull Requests", link="https://github.com/metanorma/omml2mathml/pulls"]
 image:https://img.shields.io/github/commits-since/metanorma/omml2mathml/latest.svg["Commits since latest",link="https://github.com/metanorma/omml2mathml/releases"]
