@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
     This is a Ruby gem for converting Office Math Markup (OMML) into MathML within Word HTML documents.
   DESCRIPTION
 
-  spec.homepage      = "https://github.com/metanorma/omml2mathml"
+  spec.homepage      = "https://github.com/plurimath/omml2mathml"
   spec.license       = "BSD-2-Clause"
 
   spec.bindir        = "bin"
