@@ -8,7 +8,7 @@ RSpec.describe Omml2Mathml do
   it "processes a document" do
     html = Omml2Mathml.convert("spec/test.html").sub(/<\?xml[^>]+>/, "").sub(/<!DOCTYPE[^>]+>/, "")
     expect(html).to be_equivalent_to <<~"OUTPUT"
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml">
+<html xmlns="http://www.w3.org/TR/REC-html40" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -19,11 +19,11 @@ RSpec.describe Omml2Mathml do
 <link rel="Edit-Time-Data" href="Part%201_General.fld/editdata.mso"/>
 </head>
 
-<body lang="EL" link="blue" vlink="purple" style="tab-interval:20.0pt" xml:lang="EL">
+<body lang="EL" link="blue" vlink="purple" style="tab-interval:20.0pt">
 
 <div class="WordSection3">
 
-  <p class="MsoNormal"><span lang="EN-US" style="mso-fareast-font-family:SimSun;&#10;mso-fareast-theme-font:minor-fareast;mso-ansi-language:EN-US;mso-fareast-language:&#10;ZH-CN" xml:lang="EN-US">This standard applies to the elliptic curves over the finite field </span><mml:math>
+  <p class="MsoNormal"><span lang="EN-US" style="mso-fareast-font-family:SimSun;&#10;mso-fareast-theme-font:minor-fareast;mso-ansi-language:EN-US;mso-fareast-language:&#10;ZH-CN">This standard applies to the elliptic curves over the finite field </span><mml:math>
 <mml:msub>
   <mml:mrow>
     <mml:mrow>
@@ -36,8 +36,10 @@ RSpec.describe Omml2Mathml do
     </mml:mrow>
   </mml:mrow>
 </mml:msub>
-</mml:math><span lang="EN-US" style="mso-fareast-font-family:SimSun;mso-fareast-theme-font:minor-fareast;&#10;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN" xml:lang="EN-US"><span style="mso-spacerun:yes">&#xA0;</span>(the prime </span><mml:math>
-<mml:mi>p</mml:mi><mml:msup>
+</mml:math><span lang="EN-US" style="mso-fareast-font-family:SimSun;mso-fareast-theme-font:minor-fareast;&#10;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN"><span style="mso-spacerun:yes">&#xA0;</span>(the prime </span><mml:math>
+<mml:mi>p</mml:mi>
+<mml:mo>&gt;</mml:mo>
+<mml:msup>
   <mml:mrow>
     <mml:mrow>
       <mml:mn>2</mml:mn>
@@ -49,7 +51,7 @@ RSpec.describe Omml2Mathml do
     </mml:mrow>
   </mml:mrow>
 </mml:msup>
-</mml:math><span lang="EN-US" style="mso-fareast-font-family:SimSun;mso-fareast-theme-font:minor-fareast;&#10;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN" xml:lang="EN-US">).<p/></span></p>
+</mml:math><span lang="EN-US" style="mso-fareast-font-family:SimSun;mso-fareast-theme-font:minor-fareast;&#10;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN">).<p/></span></p>
 
 </div>
 </body>
