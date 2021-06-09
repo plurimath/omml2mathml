@@ -7,4 +7,6 @@ inherit_from:
 # ...
 
 AllCops:
-  TargetRubyVersion: 2.4
+  DisplayCopNames: false
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.5
