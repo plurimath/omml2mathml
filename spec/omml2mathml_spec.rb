@@ -7,8 +7,8 @@ RSpec.describe Omml2Mathml do
   end
 
   it "processes a document" do
-    html = Omml2Mathml.convert("spec/test.html").sub(/<\?xml[^>]+>/, "").sub(/<!DOCTYPE[^>]+>/, "")
-    expect(html).to be_equivalent_to <<~"OUTPUT"
+    output = Omml2Mathml.convert("spec/test.html").sub(/<\?xml[^>]+>/, "").sub(/<!DOCTYPE[^>]+>/, "")
+    html = <<~"OUTPUT"
 <html xmlns="http://www.w3.org/TR/REC-html40" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml">
 
 <head>
@@ -66,6 +66,6 @@ RSpec.describe Omml2Mathml do
       output.gsub!(%r{ xml:lang="[\w-]+"}, "")
     end
 
-    expect(input).to be_equivalent_to output
+    expect(html).to be_equivalent_to output
   end
 end
