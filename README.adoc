@@ -1,3 +1,29 @@
+## RETIRED — superseded by Plurimath
+
+This repository was archived on 2026-11-02 and is no longer maintained. Its
+functionality — converting Office Math Markup (OMML) to MathML — is fully
+subsumed by https://github.com/plurimath/plurimath[Plurimath], which parses
+OMML through the `omml` gem's model layer and writes MathML natively.
+
+Gem usage:
+
+[source,ruby]
+----
+require "plurimath"
+
+formula = Plurimath::Math.parse(omml_xml_string, :omml)
+formula.to_mathml  # => MathML string
+----
+
+CLI usage:
+
+[source,sh]
+----
+plurimath convert --input-format omml --output-format mathml --file-input equation.omml
+----
+
+Documentation: the formal specifications for every supported format live at
+https://plurimath.github.io/docs/ .
 ## DEPRECATION NOTICE: This repository is no longer maintained. Please visit link:https://github.com/plurimath/plurimath[Plurimath] for the latest updates and features.
 
 = omml2mathml
